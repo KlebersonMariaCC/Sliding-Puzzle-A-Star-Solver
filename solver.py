@@ -30,7 +30,7 @@ class Solver():
         level = 0
         visited_nodes = set()
         
-        start_time = time.clock()
+        start_time = time.perf_counter()
         
         nodes = PriorityQueue(self.__MAX)
         init_node = GameState(self.__init_state.flatten().tolist(), self.__goal_state.flatten().tolist(), level, parent = None, heuristic_func = self.__heuristic_func)
@@ -48,7 +48,7 @@ class Solver():
             visited_nodes.add(str(cur_state))
             
             if cur_state == self.__goal_state.flatten().tolist():
-                self.__summary = str("A* took " + str(cur_node.get_level()) + " steps to get from initial state to the desired goal, visited total of " + str(epochs) + " nodes, and took around " + str(np.round(time.clock() - start_time, 4)) + " seconds to reach the desired solution.")
+                self.__summary = str("A* took " + str(cur_node.get_level()) + " steps to get from initial state to the desired goal, visited total of " + str(epochs) + " nodes, and took around " + str(np.round(time.perf_counter() - start_time, 4)) + " seconds to reach the desired solution.")
                 while cur_node.get_parent():
                     self.__path.append(cur_node)
                     cur_node = cur_node.get_parent()
