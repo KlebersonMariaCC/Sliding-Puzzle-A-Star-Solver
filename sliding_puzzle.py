@@ -52,6 +52,7 @@ def A_star(init_state, goal_state, max_iter, heuristic):
     solver = Solver(init_state, goal_state, heuristic, max_iter)
     path = solver.solve_a_star()
     
+    
     if len(path) == 0:
         exit(1)
     
@@ -139,3 +140,5 @@ def main(argv):
     
 if __name__ == "__main__":
     main(sys.argv[1:])
+
+

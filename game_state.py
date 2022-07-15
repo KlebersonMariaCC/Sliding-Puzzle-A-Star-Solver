@@ -34,19 +34,29 @@ class GameState():
         return self.__parent
     
     def calculate_fitness(self):
-        if self.__heuristic_func == "misplaced_tiles":
-            for cur_tile, goal_tile in zip(self.__state, self.__goal_state):
+        self.__heuristic_score = self.misplaced_tiles(1) + self.manhattan(0)
+        
+            
+        
+    
+    def misplaced_tiles(self,w0):
+        heuristic_score = 0
+        for cur_tile, goal_tile in zip(self.__state, self.__goal_state):
                 if cur_tile != goal_tile:
-                    self.__heuristic_score += 1
-        elif self.__heuristic_func == "manhattan":
-            for cur_tile in self.__state:
+                    heuristic_score += 1
+        return w0 * heuristic_score
+    
+    def manhattan(self,w1):
+        heuristic_score = 0
+        for cur_tile in self.__state:
                 cur_idx = self.__state.index(cur_tile)
                 goal_idx = self.__goal_state.index(cur_tile)
                 cur_i, cur_j = cur_idx // int(np.sqrt(len(self.__state))), cur_idx % int(np.sqrt(len(self.__state)))
                 goal_i, goal_j = goal_idx // int(np.sqrt(len(self.__state))), goal_idx % int(np.sqrt(len(self.__state)))
-                self.__heuristic_score += self.calculate_manhattan(cur_i, cur_j, goal_i, goal_j)
-        else:
-            print('Unknown heuristic function is being used.')
-            
+                heuristic_score += self.calculate_manhattan(cur_i, cur_j, goal_i, goal_j)
+        
+        return w1 * heuristic_score
+
+
     def calculate_manhattan(self, x1, y1, x2, y2):
         return abs(x1 - x2) + abs(y1 - y2)
