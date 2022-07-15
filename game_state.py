@@ -1,6 +1,6 @@
 import numpy as np
 class GameState():
-    def __init__(self, state, goal_state, level, parent = None, heuristic_func = "manhattan"):
+    def __init__(self, state, goal_state, level, parent = None, heuristic_func = None):
         self.__state = state
         self.__goal_state = goal_state
         self.__level = level
@@ -34,7 +34,7 @@ class GameState():
         return self.__parent
     
     def calculate_fitness(self):
-        self.__heuristic_score = self.misplaced_tiles(1) + self.manhattan(0)
+        self.__heuristic_score += self.misplaced_tiles(self.__heuristic_func[0]) + self.manhattan(self.__heuristic_func[1])
         
             
         

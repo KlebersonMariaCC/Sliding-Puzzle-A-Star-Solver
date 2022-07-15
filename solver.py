@@ -4,7 +4,7 @@ import numpy as np
 import time
 
 class Solver():
-    def __init__(self, init_state, goal_state, heuristic_func = "manhattan", max_iter = 25000):
+    def __init__(self, init_state, goal_state, heuristic_func, max_iter = 25000):
         self.__init_state = init_state
         self.__goal_state = goal_state
         self.__heuristic_func = heuristic_func

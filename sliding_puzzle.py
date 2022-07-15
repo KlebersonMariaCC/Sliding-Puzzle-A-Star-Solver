@@ -77,7 +77,7 @@ def A_star(init_state, goal_state, max_iter, heuristic):
             print('Moved RIGHT from ' + str((init_i, init_j)) + ' --> ' + str((cur_i, cur_j)))
         else:
             print('Moved LEFT  from ' + str((init_i, init_j)) + ' --> ' + str((cur_i, cur_j)))
-        print('Score using ' + heuristic + ' heuristic is ' + str(node.get_score() - node.get_level()) + ' in level ' + str(node.get_level()))
+        print('Score using w0 = ' + str(heuristic[0]) + " w1 = " + str(heuristic[1]) + ' heuristic is ' + str(node.get_score() - node.get_level()) + ' in level ' + str(node.get_level()))
     
         init_i, init_j = cur_i, cur_j
         
@@ -88,12 +88,12 @@ def A_star(init_state, goal_state, max_iter, heuristic):
 
 def main(argv):
     max_iter = 5000
-    heuristic = "manhattan"
+    heuristic = list()
     algorithm = "a_star"
     n = 3
     
     try:
-        opts, args = getopt.getopt(argv,"hn:",["mx=", "heur=", "astar", "bfs"])
+        opts, args = getopt.getopt(argv,"hn:",["mx=", "w0=","w1=", "astar", "bfs"])
     except getopt.GetoptError:
         print('python sliding_puzzle.py -h <help> -n <matrix shape ex: n = 3 -> 3x3 matrix> --mx <maximum_nodes> --heur <heuristic> --astar (default algorithm) or --bfs')
         sys.exit(2)
@@ -105,9 +105,11 @@ def main(argv):
             n = int(arg)
         elif opt in ("--mx"):
             max_iter = int(arg)
-        elif opt in ("--heur"):
-            if arg == "manhattan" or arg == "misplaced_tiles":
-                heuristic = (arg)
+        elif opt in ("--w0"):
+            #if arg == "manhattan" or arg == "misplaced_tiles":
+                heuristic.append(int(arg))
+        elif opt in ("--w1"):
+            heuristic.append(int(arg))
         elif opt in ("--astar"):
             algorithm = "a_star"
         elif opt in ("--bfs"):
