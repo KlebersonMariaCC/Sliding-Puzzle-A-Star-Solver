@@ -4,7 +4,7 @@ import numpy as np
 import time
 
 class Solver():
-    def __init__(self, init_state, goal_state, heuristic_func = "manhattan", max_iter = 2500):
+    def __init__(self, init_state, goal_state, heuristic_func = "manhattan", max_iter = 25000):
         self.__init_state = init_state
         self.__goal_state = goal_state
         self.__heuristic_func = heuristic_func
@@ -48,7 +48,8 @@ class Solver():
             visited_nodes.add(str(cur_state))
             
             if cur_state == self.__goal_state.flatten().tolist():
-                self.__summary = str("A* took " + str(cur_node.get_level()) + " steps to get from initial state to the desired goal, visited total of " + str(epochs) + " nodes, and took around " + str(np.round(time.perf_counter() - start_time, 4)) + " seconds to reach the desired solution.")
+                ## str("A* took " + str(cur_node.get_level()) + " steps to get from initial state to the desired goal, visited total of " + str(epochs) + " nodes, and took around " + str(np.round(time.perf_counter() - start_time, 4)) + " seconds to reach the desired solution.")
+                self.__summary = [cur_node.get_level(), epochs, np.round(time.perf_counter() - start_time, 4)]
                 while cur_node.get_parent():
                     self.__path.append(cur_node)
                     cur_node = cur_node.get_parent()
