@@ -107,9 +107,9 @@ def main(argv):
             max_iter = int(arg)
         elif opt in ("--w0"):
             #if arg == "manhattan" or arg == "misplaced_tiles":
-                heuristic.append(int(arg))
+                heuristic.append(float(arg))
         elif opt in ("--w1"):
-            heuristic.append(int(arg))
+            heuristic.append(float(arg))
         elif opt in ("--astar"):
             algorithm = "a_star"
         elif opt in ("--bfs"):
