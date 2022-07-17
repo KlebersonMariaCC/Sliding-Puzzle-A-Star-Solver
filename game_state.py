@@ -60,3 +60,17 @@ class GameState():
 
     def calculate_manhattan(self, x1, y1, x2, y2):
         return abs(x1 - x2) + abs(y1 - y2)
+
+    def euclidian(self,w3):
+        heuristic_score = 0
+        for cur_tile in self.__state:
+                cur_idx = self.__state.index(cur_tile)
+                goal_idx = self.__goal_state.index(cur_tile)
+                cur_i, cur_j = cur_idx // int(np.sqrt(len(self.__state))), cur_idx % int(np.sqrt(len(self.__state)))
+                goal_i, goal_j = goal_idx // int(np.sqrt(len(self.__state))), goal_idx % int(np.sqrt(len(self.__state)))
+                heuristic_score += self.calculate_euclidian(cur_i, cur_j, goal_i, goal_j)
+        
+        return w3 * heuristic_score
+
+    def calculate_euclidian(self, x1, y1, x2, y2):
+        return np.sqrt((x1 - x2)**2 + (y1 - y2)**2)

@@ -93,7 +93,7 @@ def main(argv):
     n = 3
     
     try:
-        opts, args = getopt.getopt(argv,"hn:",["mx=", "w0=","w1=", "astar", "bfs"])
+        opts, args = getopt.getopt(argv,"hn:",["mx=", "w0=", "w1=", "w2=", "astar", "bfs"])
     except getopt.GetoptError:
         print('python sliding_puzzle.py -h <help> -n <matrix shape ex: n = 3 -> 3x3 matrix> --mx <maximum_nodes> --heur <heuristic> --astar (default algorithm) or --bfs')
         sys.exit(2)
@@ -109,6 +109,8 @@ def main(argv):
             #if arg == "manhattan" or arg == "misplaced_tiles":
                 heuristic.append(float(arg))
         elif opt in ("--w1"):
+            heuristic.append(float(arg))
+        elif opt in("--w2"):
             heuristic.append(float(arg))
         elif opt in ("--astar"):
             algorithm = "a_star"

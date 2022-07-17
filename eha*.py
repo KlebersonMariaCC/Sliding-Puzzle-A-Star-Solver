@@ -8,7 +8,7 @@ import operator
 import functools
 
 def fitness_func(solution, solution_idx):
-    a_star = solver.Solver(np.array([[1,3,5],[7,0,2],[4,6,8]]), np.array([[1,2,3],[4,5,6],[7,8,0]]),solution, 10000)
+    a_star = solver.Solver(np.array([[2,15,5,4],[10,0,8,13],[14,3,9,7],[1,6,12,11]]), np.array([[1,2,3,4],[5,6,7,8],[9,10,11,12],[13,14,15,0]]),solution, 25000)
     a_star.solve_a_star()
     output = a_star.get_summary()
     print(a_star.get_summary())
@@ -23,22 +23,22 @@ def fitness_func(solution, solution_idx):
 fitness_function = fitness_func
 
 num_generations = 50
-num_parents_mating = 2
+num_parents_mating = 4
 
 sol_per_pop = 8
-num_genes = 2
-gene_type = [float,float]
+num_genes = 3
+gene_type = [float,float,float]
 
 init_range_low = -10
 init_range_high = 10
 
-parent_selection_type = "sss"
+parent_selection_type = "rank"
 keep_parents = 1
 
 crossover_type = "single_point"
 
 mutation_type = "random"
-mutation_percent_genes = 0.1
+mutation_percent_genes = 5
 
 ga_instance = pygad.GA(num_generations=num_generations,
                        num_parents_mating=num_parents_mating,
